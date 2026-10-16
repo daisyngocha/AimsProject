@@ -7,6 +7,7 @@ public class Cart {
 	public static final int max_number_orders = 20;
 	private DigitalVideoDisk itemOrders[] = new DigitalVideoDisk[max_number_orders];
 	
+
 	//GETTER + SETTER
 	public void setQtyOrdered(int qtyOrdered) {
 		this.qtyOrdered = qtyOrdered;
@@ -20,6 +21,8 @@ public class Cart {
 	public Cart(int qtyOrdered) {
 		this.qtyOrdered = 0;
 	}
+	
+	public Cart() {};
 	
 	//Add  items to the list
 	public void addDigitalVideoDisk(DigitalVideoDisk disk) {
@@ -38,31 +41,30 @@ public class Cart {
 		for (int i = 0; i < this.qtyOrdered; i++) {
 			if (this.itemOrders[i].equals(disk)) {
 				index = i;
+				break;
 			}
 		}
 		
 		if (index == -1) {
 			System.out.println("No disk found!");
+			return;
 		};
 		
 		for (int i = index; i < this.qtyOrdered; i++) {
 			itemOrders[i] = itemOrders[i+1];
 		};
-		
 		itemOrders[this.qtyOrdered] = null;
 	}
 	
 	// Tinh total cost
-	public float totalCost(DigitalVideoDisk list) {
+	public float totalCost() {
 		float totalCost = 0;
 		for (int i = 0; i < this.qtyOrdered; i++) {
-			totalCost += list.getCost();
+			totalCost += itemOrders[i].getCost();
 		}
 		
 		return totalCost;
 	}
-	
-	
 	
 }
 	
